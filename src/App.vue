@@ -3,10 +3,11 @@
 
     <div class="container fluid at -3">
       <div class="jumbotron">
-        <h1>Tp 4 iara</h1>
+        <h1>Tp 8 iara</h1>
          <NavBar></NavBar>
 
           <router-view></router-view>
+          <tabla-personas-vuex />
       </div>
     </div>
   </div>
@@ -14,10 +15,12 @@
 
 <script>
 import NavBar from './componentes/NavBar.vue'
+import TablaPersonasVuex from './componentes/TablaPersonasVuex.vue'
 export default {
   name: 'App',
   components: {
     NavBar,
+    TablaPersonasVuex,
   }
 }
 </script>

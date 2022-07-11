@@ -97,27 +97,14 @@
     <!-- <p><u>FormState</u></p>
     <pre> {{ formState }}</pre> -->
 
+    
     <hr>
-<div class="table-responsive">
-<table class="table table-dark">
-    <tr>
-        <th>id</th>
-        <th>nombre</th>
-        <th>edad</th>
-        <th>email</th>
-    </tr>
-    <tr v-for="(usuario,index) in usuarios" :key="index">
-        <td>{{ index + 1 }}</td>
-        <td>{{ usuario.nombre }}</td>
-        <td>{{ usuario.edad }}</td>
-        <td>{{ usuario.email }}</td>
-        
-    </tr>
-</table>
+         
   </div>
-</div>
-    <TablaPersonas/>
-</div>
+   </div>
+
+    
+  
 </section>
 
 </template>
@@ -129,7 +116,7 @@
     components:{
         
     },
-    props: ['usuarios'],
+    props: [],
     mounted () {
 
     },
@@ -138,13 +125,22 @@
         formState: {},
         formData: this.getInicialData(),
         
-        url:'https://6286bd1ee9494df61b2cbd05.mockapi.io/tp2/usuarios/usuarios',
+        url:this.$store.state.url,
       }
     },
     methods: {
+       getUsuarios(){
+            
+            this.$store.dispatch('getUsuarios')
+           },
+      eliminarUsuarios(){
+      this.$store.dispatch('eliminarUsuarios')
+      },
       enviar(){
-        let usuario= {...this.formData}
-        this.postUsuario(usuario)
+        this.$store.dispatch("addUsuario",this.formData);
+        console.log({...this.formData})
+        this.formData = this.getInicialData()
+        this.formState._reset()
       },
       getInicialData(){
         return{
@@ -178,7 +174,9 @@
 
     
     computed: {
-
+        obtenerUsuarios(){  
+        return this.$store.state.usuarios
+      }
     },
     }
   }
